@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
 
 ai() {
-	local assignment
-	local name
-	local -a types
-
 	while IFS= read -r; do
-		assignment=${REPLY#alias }
-		name=${assignment%=*}
-		types=($(type -at "$name"))
+		local assignment=${REPLY#alias }
+		local name=${assignment%=*}
+		local -a types
+
+		mapfile -t types < <(type -at "$name")
 
 		for type in "${types[@]}"; do
 			[[ $type = builtin ]] && printf 'The alias \e[33m%s\e[0m shadows a builtin of the same name.\n' "$name"
 			[[ $type = file ]] && printf 'The alias \e[33m%s\e[0m shadows a command of the same name.\n' "$name"
 		done
-	done <<<$(alias)
+	done < <(alias)
 }
