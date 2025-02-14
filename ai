@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 ai() {
+	local assignment name types
+
 	while IFS= read -r; do
-		local assignment=${REPLY#alias }
-		local name=${assignment%=*}
-		local -a types
+		assignment=${REPLY#alias }
+		name=${assignment%=*}
 
 		mapfile -t types < <(type -at "$name")
 
