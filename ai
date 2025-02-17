@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ai() {
-	local assignment name types
+	local assignment name types warnings=()
 
 	while IFS= read -r; do
 		assignment=${REPLY#alias }
@@ -10,8 +10,24 @@ ai() {
 		mapfile -t types < <(type -at "$name")
 
 		for type in "${types[@]}"; do
-			[[ $type = builtin ]] && printf 'The alias \e[33m%s\e[0m shadows a builtin of the same name.\n' "$name"
-			[[ $type = file ]] && printf 'The alias \e[33m%s\e[0m shadows a command of the same name.\n' "$name"
+			case "$type" in
+			builtin)
+				warnings+=($'The alias \e[33m'$name$'\e[0m shadows a builtin of the same name.')
+				;;
+			file)
+				warnings+=($'The alias \e[33m'$name$'\e[0m shadows a command of the same name.')
+				;;
+			esac
 		done
+
 	done < <(alias)
+
+	if ((${#warnings[@]} > 0)); then
+		for warning in "${warnings[@]}"; do
+			printf '%s\n' "$warning"
+		done
+
+		return 1
+	fi
+
 }
