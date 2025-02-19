@@ -12,10 +12,10 @@ ai() {
 		for type in "${types[@]}"; do
 			case "$type" in
 			builtin)
-				warnings+=($'The alias \e[33m'$name$'\e[0m shadows a builtin of the same name.')
+				warnings+=($'The alias \e[33m'$name$'\e[0m overrides a builtin of the same name.')
 				;;
 			file)
-				warnings+=($'The alias \e[33m'$name$'\e[0m shadows a command of the same name.')
+				warnings+=($'The alias \e[33m'$name$'\e[0m overrides a shell command of the same name.')
 				;;
 			esac
 		done
@@ -30,4 +30,5 @@ ai() {
 		return 1
 	fi
 
+        printf '\e[32mNo shell command or builtin is overridden.\e[0m\n'
 }
