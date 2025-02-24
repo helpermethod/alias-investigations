@@ -3,6 +3,16 @@
 ai() {
 	local assignment name types warnings=()
 
+	if [[ -t 1 ]]; then
+		local green=$'\e[32m'
+		local yellow=$'\e[33m'
+		local reset=$'\e[0m'
+	else
+		local green=''
+		local yellow=''
+		local reset=''
+	fi
+
 	while IFS= read -r; do
 		assignment=${REPLY#alias }
 		name=${assignment%=*}
@@ -12,10 +22,10 @@ ai() {
 		for type in "${types[@]}"; do
 			case "$type" in
 			builtin)
-				warnings+=($'The alias \e[33m'$name$'\e[0m overrides a builtin of the same name.')
+				warnings+=("The alias $yellow$name$reset overrides a builtin of the same name.")
 				;;
 			file)
-				warnings+=($'The alias \e[33m'$name$'\e[0m overrides a shell command of the same name.')
+				warnings+=("The alias $yellow$name$reset overrides a shell command of the same name.")
 				;;
 			esac
 		done
@@ -30,5 +40,5 @@ ai() {
 		return 1
 	fi
 
-        printf '\e[32mNo shell command or builtin is overridden.\e[0m\n'
+	printf "${green}No shell command or builtin is overridden.$reset\n"
 }
