@@ -40,5 +40,5 @@ ai() {
 		return 1
 	fi
 
-	printf "${green}No shell command or builtin is overridden.$reset\n"
+	printf "%sNo shell command or builtin is overridden.%s\n" "$green" "$reset"
 }
