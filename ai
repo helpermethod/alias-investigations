@@ -23,9 +23,11 @@ ai() {
 			case "$type" in
 			builtin)
 				warnings+=("The alias $yellow$name$reset overrides a builtin of the same name.")
+                                break
 				;;
 			file)
 				warnings+=("The alias $yellow$name$reset overrides a shell command of the same name.")
+                                break
 				;;
 			esac
 		done
