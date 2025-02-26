@@ -26,7 +26,7 @@ ai() {
                                 break
 				;;
 			file)
-				warnings+=("The alias $yellow$name$reset overrides a shell command of the same name.")
+				warnings+=("The alias $yellow$name$reset overrides a command of the same name.")
                                 break
 				;;
 			esac
@@ -42,5 +42,5 @@ ai() {
 		return 1
 	fi
 
-	printf "%sNo shell command or builtin is overridden.%s\n" "$green" "$reset"
+	printf "%sNo command or builtin is overridden.%s\n" "$green" "$reset"
 }

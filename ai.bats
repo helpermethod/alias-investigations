@@ -8,7 +8,7 @@ load ai
 	run ai
 
 	[[ $status = 1 ]]
-	[[ $output = 'The alias rm overrides a shell command of the same name.' ]]
+	[[ $output = 'The alias rm overrides a command of the same name.' ]]
 }
 
 @test 'should fail if an alias overrides a builtin' {
@@ -24,5 +24,5 @@ load ai
 	run ai
 
 	[[ $status = 0 ]]
-	[[ $output = 'No shell command or builtin is overridden.' ]]
+	[[ $output = 'No command or builtin is overridden.' ]]
 }
