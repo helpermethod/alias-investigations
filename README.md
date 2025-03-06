@@ -1,3 +1,5 @@
 # Alias Investigations
 
-A Bash script to detect if aliases override commands and builtins of the same name.
+A Bash function to detect if aliases override commands and builtins of the same name.
+
+<img alt="up.gif" src="up.gif" width="600" />
