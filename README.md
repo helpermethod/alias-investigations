@@ -1,4 +1,4 @@
-# Alias Investigations
+# 🕵️ Alias Investigations
 
 A Bash function for detecting if an alias overrides a command or builtin.
 
