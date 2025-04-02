@@ -13,7 +13,7 @@ ai() {
 
 	while IFS= read -r; do
 		assignment=${REPLY#alias }
-		name=${assignment%=*}
+		name=${assignment%%=*}
 
 		mapfile -t types < <(type -at "$name")
 
