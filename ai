@@ -29,7 +29,6 @@ ai() {
 				;;
 			esac
 		done
-
 	done < <(alias)
 
 	if ((${#warnings[@]} > 0)); then
