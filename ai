@@ -12,7 +12,7 @@ ai() {
 	fi
 
 	while IFS= read -r; do
-		assignment=${REPLY#alias }
+		assignment=${REPLY#alias}
 		name=${assignment%%=*}
 
 		mapfile -t types < <(type -at "$name")
@@ -21,11 +21,11 @@ ai() {
 			case "$type" in
 			builtin)
 				warnings+=("The alias $yellow$name$reset overrides a builtin of the same name.")
-                                break
+                break
 				;;
 			file)
 				warnings+=("The alias $yellow$name$reset overrides a command of the same name.")
-                                break
+                break
 				;;
 			esac
 		done
